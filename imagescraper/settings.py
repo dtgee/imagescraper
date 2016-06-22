@@ -65,7 +65,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'imagescraper.pipelines.SomePipeline': 300,
+    'scrapy.contrib.pipeline.images.FilesPipeline': 1,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -88,3 +88,4 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+FILES_STORE = "/home/users/terence/Desktop/projects/imagescraper/output"

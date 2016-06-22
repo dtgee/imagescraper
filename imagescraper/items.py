@@ -8,7 +8,6 @@
 import scrapy
 
 
-class ImagescraperItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class ImageScraper(scrapy.Item):
+    file_urls = scrapy.Field()
+    files = scrapy.Field() 
