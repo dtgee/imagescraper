@@ -12,11 +12,12 @@ class ImageSpider(scrapy.Spider):
 
         for url in response.css('a[class^=' + link_class + ']').xpath("@href").extract():
             if url.endswith(self.img_extensions):
-                yield Image(file_urls=[img_url])
+                yield Image(file_urls=[url])
             else:
                 yield scrapy.Request(url, self.parse_page)
 
     def parse_page(self, response):
-        img_url = response.xpath("//img/@src").extract()
-        
-        yield Image(file_urls=[img_url]) 
+        for img_url in response.xpath("//img/@src").extract():
+            if not (img_url.startswith("http")): 
+                img_url = "https:" + img_url
+            yield Image(file_urls=[img_url]) 
