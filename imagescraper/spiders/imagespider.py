@@ -1,6 +1,7 @@
 from imagescraper.items import Image
 import datetime
 import scrapy
+import urlparse
 
 class ImageSpider(scrapy.Spider):
     name = "image-spider"
@@ -11,6 +12,8 @@ class ImageSpider(scrapy.Spider):
         link_class = "\"thumbnail may-blank\""
 
         for url in response.css('a[class^=' + link_class + ']').xpath("@href").extract():
+            url = self.absolute_url(response, url)
+            # change to if url contains .jpeg
             if url.endswith(self.img_extensions):
                 yield Image(file_urls=[url])
             else:
@@ -18,6 +21,9 @@ class ImageSpider(scrapy.Spider):
 
     def parse_page(self, response):
         for img_url in response.xpath("//img/@src").extract():
-            if not (img_url.startswith("http")): 
-                img_url = "https:" + img_url
+            img_url = self.absolute_url(response, img_url)
             yield Image(file_urls=[img_url]) 
+
+    def absolute_url(self, response, url):
+        url = urlparse.urljoin(response.url, url.strip())
+        return url
