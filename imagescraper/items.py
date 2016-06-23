@@ -8,6 +8,6 @@
 import scrapy
 
 
-class ImageScraper(scrapy.Item):
+class Image(scrapy.Item):
     file_urls = scrapy.Field()
     files = scrapy.Field() 
