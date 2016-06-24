@@ -20,7 +20,27 @@ class ImageSpider(scrapy.Spider):
                 yield scrapy.Request(url, self.parse_page)
 
     def parse_page(self, response):
-        for img_url in response.xpath("//img/@src").extract():
+        for img_url in response.xpath('//img                                    \
+                                        [                                       \
+                                            not(                                \
+                                                contains(@class,"thumb")        \
+                                                 or                             \
+                                                contains(@class,"preview")      \
+                                               )                                \
+                                        ]                                       \
+                                       /@src                                    \
+                                        [                                       \
+                                            contains(., ".jpg")                 \
+                                             or                                 \
+                                            contains(., ".jpeg")                \
+                                             or                                 \
+                                            contains(., ".png")                 \
+                                             or                                 \
+                                            contains(., ".gif")                 \
+                                        ]                                       \
+                                      '                                         \
+                                     )                                          \
+                               .extract():
             img_url = self.absolute_url(response, img_url)
             yield Image(file_urls=[img_url]) 
 
