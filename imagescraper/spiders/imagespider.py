@@ -20,26 +20,38 @@ class ImageSpider(scrapy.Spider):
                 yield scrapy.Request(url, self.parse_page)
 
     def parse_page(self, response):
-        for img_url in response.xpath('//img                                    \
-                                        [                                       \
-                                            not(                                \
-                                                contains(@class,"thumb")        \
-                                                 or                             \
-                                                contains(@class,"preview")      \
-                                               )                                \
-                                        ]                                       \
-                                       /@src                                    \
-                                        [                                       \
-                                            contains(., ".jpg")                 \
-                                             or                                 \
-                                            contains(., ".jpeg")                \
-                                             or                                 \
-                                            contains(., ".png")                 \
-                                             or                                 \
-                                            contains(., ".gif")                 \
-                                        ]                                       \
-                                      '                                         \
-                                     )                                          \
+#//img[not(ancestor::a)]/@src[contains(., ".jpg")] | //a[img/@src[contains(., ".jpg")]]/@href
+        for img_url in response.xpath('//img                            \
+                                          [                             \
+                                            not(ancestor::a)            \
+                                          ]                             \
+                                       /@src                            \
+                                        [                               \
+                                            contains(., ".jpg")         \
+                                             or                         \
+                                            contains(., ".jpeg")        \
+                                             or                         \
+                                            contains(., ".png")         \
+                                             or                         \
+                                            contains(., ".gif")         \
+                                        ]                               \
+                                      |                                 \
+                                       //a                              \
+                                        [                               \
+                                            img/@src                    \
+                                            [                           \
+                                                 contains(., ".jpg")    \
+                                                  or                    \
+                                                 contains(., ".jpeg")   \
+                                                  or                    \
+                                                 contains(., ".png")    \
+                                                  or                    \
+                                                 contains(., ".gif")    \
+                                            ]                           \
+                                        ]                               \
+                                       /@href                           \
+                                      '                                 \
+                                     )                                  \
                                .extract():
             img_url = self.absolute_url(response, img_url)
             yield Image(file_urls=[img_url]) 
