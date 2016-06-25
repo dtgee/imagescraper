@@ -7,6 +7,8 @@ class ImageSpider(scrapy.Spider):
     name = "image-spider"
     start_urls = ["https://www.reddit.com/r/pics"]
     img_extensions = ('.jpg', '.jpeg', '.png', '.gif')
+    handle_httpstatus_list = [301, 302]
+    handle_httpstatus_all = False
 
     def parse(self, response):
         link_class = "\"thumbnail may-blank\""
