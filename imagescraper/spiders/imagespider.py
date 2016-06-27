@@ -23,7 +23,8 @@ class ImageSpider(scrapy.Spider):
 
     def parse_page(self, response):
 #//img[not(ancestor::a)]/@src[contains(., ".jpg")] | //a[img/@src[contains(., ".jpg")]]/@href
-        for img_url in response.xpath('//img                            \
+        try:
+            data = response.xpath('//img                                \
                                           [                             \
                                             not(ancestor::a)            \
                                           ]                             \
@@ -54,9 +55,13 @@ class ImageSpider(scrapy.Spider):
                                        /@href                           \
                                       '                                 \
                                      )                                  \
-                               .extract():
-            img_url = self.absolute_url(response, img_url)
-            yield Image(file_urls=[img_url]) 
+                                     .extract()
+            for img_url in data:
+                img_url = self.absolute_url(response, img_url)
+                yield Image(file_urls=[img_url]) 
+        except AttributeError:
+            if response.status == 200:
+                yield Image(file_urls=[response.url])
 
     def absolute_url(self, response, url):
         url = urlparse.urljoin(response.url, url.strip())
