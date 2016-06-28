@@ -24,7 +24,7 @@ class ImageSpider(scrapy.Spider):
         for url in data: 
             url = self.absolute_url(response, url)
             if any(ext in url for ext in self.img_extensions):
-                yield Image(file_urls=[url])
+                yield Image(image_urls=[url])
             else:
                 yield scrapy.Request(url, self.parse_page)
 
@@ -58,10 +58,10 @@ class ImageSpider(scrapy.Spider):
                                   .extract()
             for img_url in data:
                 img_url = self.absolute_url(response, img_url)
-                yield Image(file_urls=[img_url]) 
+                yield Image(image_urls=[img_url]) 
         except AttributeError:
             if response.status == 200:
-                yield Image(file_urls=[response.url])
+                yield Image(image_urls=[response.url])
 
     def absolute_url(self, response, url):
         url = urlparse.urljoin(response.url, url.strip())
