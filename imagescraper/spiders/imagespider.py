@@ -5,7 +5,7 @@ import urlparse
 
 class ImageSpider(scrapy.Spider):
     name = "image-spider"
-    start_urls = ["https://www.reddit.com/r/pics"]
+    start_urls = ["https://www.reddit.com/r/food"]
     img_extensions = ('.jpg', '.jpeg', '.png', '.gif')
     xpath_extensions = '                            \
                           contains(., ".jpg")       \
@@ -31,7 +31,7 @@ class ImageSpider(scrapy.Spider):
     def parse_page(self, response):
         # Sometimes the links are to the images themselves rather than to a page that contains
         # images. If so, 'data' won't return anything useful and we would have an error using
-        # response.xpath(), so we have to grab the image url through response.url instead.
+        # response.xpath(), so we just grab the image url through response.url instead.
         try:
             data = response.xpath('//img                                   \
                                        [                                   \
