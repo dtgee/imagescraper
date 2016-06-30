@@ -27,7 +27,12 @@ class PostgresPipeline(object):
     def process_item(self, item, spider):
         if item['images']:
             cur = self.conn.cursor()
-            SQL = "insert into images(path, url) values(%s, %s);"
+            SQL = "insert into images(path, url)
+                    select
+                        (%s, %s)
+                    where not exists (
+                        select * from images where path = %s and url = %s
+                    );"
             SQL_data = (item['images'][0]['path'], item['image_urls'][0]) 
             try:
                 cur.execute(SQL, SQL_data)
