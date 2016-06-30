@@ -91,3 +91,7 @@ ITEM_PIPELINES = {
 IMAGES_STORE = "/home/terence/Desktop/projects/imagescraper/output"
 IMAGES_MIN_HEIGHT = 100
 IMAGES_MIN_WIDTH = 100
+DB_NAME = "imagescraper"
+DB_USER = "terence"
+DB_HOST = "localhost"
+DB_PASSWD = "reddit"

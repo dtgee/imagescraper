@@ -10,4 +10,5 @@ import scrapy
 
 class Image(scrapy.Item):
     image_urls = scrapy.Field()
-    images = scrapy.Field() 
+    images = scrapy.Field()
+    path = scrapy.Field()
