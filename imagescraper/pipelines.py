@@ -27,13 +27,16 @@ class PostgresPipeline(object):
     def process_item(self, item, spider):
         if item['images']:
             cur = self.conn.cursor()
-            SQL = "insert into images(path, url)
-                    select
-                        (%s, %s)
+            path = item['images'][0]['path']
+            url_source = item['image_urls'][0]
+
+            SQL = """insert into images(path, url)
+                    select %s, %s
                     where not exists (
-                        select * from images where path = %s and url = %s
-                    );"
-            SQL_data = (item['images'][0]['path'], item['image_urls'][0]) 
+                        select * from images where url = %s
+                    );"""
+            SQL_data = (path, url_source, url_source)
+
             try:
                 cur.execute(SQL, SQL_data)
             except Exception,e:
