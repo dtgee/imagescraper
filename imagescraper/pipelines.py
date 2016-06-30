@@ -6,12 +6,14 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import psycopg2
+from scrapy.utils.project import get_project_settings
 
 SETTINGS = get_project_settings()
 
-class ImagescraperPipeline(object):
+class PostgresPipeline(object):
 
     def __init__(self):
+        self.conn = None
         try:
             self.conn = psycopg2.connect('''
                                          db_name="{}",
@@ -19,10 +21,11 @@ class ImagescraperPipeline(object):
                                          password="{}",
                                          host="{}"
                                          '''.format(
-                                                    SETTINGS['DB_NAME']
-                                                    SETTINGS['DB_USER']
-                                                    SETTINGS['DB_PASSWD']
+                                                    SETTINGS['DB_NAME'],
+                                                    SETTINGS['DB_USER'],
+                                                    SETTINGS['DB_PASSWD'],
                                                     SETTINGS['DB_HOST'])
+                                        )
         except:
             print "Unable to connect to database."
 
@@ -31,7 +34,7 @@ class ImagescraperPipeline(object):
 
         try:
             cur.execute('''
-                insert into image(path, url) values(%s, %s);
+                insert into images(path, url) values(%s, %s);
                 ''', [
                 item['image_urls'],
                 item['images'][0]['path'],

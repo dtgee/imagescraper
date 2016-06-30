@@ -66,6 +66,7 @@ ROBOTSTXT_OBEY = True
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'scrapy.pipelines.images.ImagesPipeline': 1,
+    'imagescraper.pipelines.PostgresPipeline': 100,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
