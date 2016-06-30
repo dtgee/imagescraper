@@ -23,16 +23,15 @@ class PostgresPipeline(object):
             print "Unable to connect to database."
 
     def process_item(self, item, spider):
-        cur = self.conn.cursor()
-
-        try:
-            cur.execute('''
-                insert into images(path, url) values(%s, %s);
-                ''', [
-                item['image_urls'],
-                item['images'][0]['path'],
-                ])
-        except:
-            print "Failed to insert into database!"
-            self.conn.commit()
-            return item
+        if item['images']:
+            cur = self.conn.cursor()
+            SQL = "insert into images(path, url) values(%s, %s);"
+            SQL_data = (item['image_urls'][0], item['images'][0]['path'])
+            print "############"
+            print item['images'][0]['path']
+            try:
+                cur.execute(SQL, SQL_data)
+                self.conn.commit()
+            except:
+                print "Failed to insert into database!"
+        return item
