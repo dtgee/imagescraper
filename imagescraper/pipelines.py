@@ -19,19 +19,19 @@ class PostgresPipeline(object):
                                          user=SETTINGS['DB_USER'],
                                          password=SETTINGS['DB_PASSWD'],
                                          host=SETTINGS['DB_HOST'])
-        except:
+            self.conn.autocommit = True
+        except Exception,e:
             print "Unable to connect to database."
+            print str(e)
 
     def process_item(self, item, spider):
         if item['images']:
             cur = self.conn.cursor()
             SQL = "insert into images(path, url) values(%s, %s);"
-            SQL_data = (item['image_urls'][0], item['images'][0]['path'])
-            print "############"
-            print item['images'][0]['path']
+            SQL_data = (item['images'][0]['path'], item['image_urls'][0]) 
             try:
                 cur.execute(SQL, SQL_data)
-                self.conn.commit()
-            except:
+            except Exception,e:
                 print "Failed to insert into database!"
+                print str(e)
         return item
