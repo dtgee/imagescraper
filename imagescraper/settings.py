@@ -94,5 +94,4 @@ IMAGES_MIN_HEIGHT = 100
 IMAGES_MIN_WIDTH = 100
 DB_NAME = "imagescraper"
 DB_USER = "terence"
-DB_PASSWD = "reddit"
 DB_HOST = "localhost"

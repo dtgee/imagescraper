@@ -15,11 +15,13 @@ class PostgresPipeline(object):
     def __init__(self):
         self.conn = None
         try:
-            self.conn = psycopg2.connect(database=SETTINGS['DB_NAME'],
-                                         user=SETTINGS['DB_USER'],
-                                         password=SETTINGS['DB_PASSWD'],
-                                         host=SETTINGS['DB_HOST'])
-            self.conn.autocommit = True
+            with open('pw.txt') as f:
+                pw = f.readline().rstrip('\n')
+                self.conn = psycopg2.connect(database=SETTINGS['DB_NAME'],
+                                             user=SETTINGS['DB_USER'],
+                                             password=pw,
+                                             host=SETTINGS['DB_HOST'])
+                self.conn.autocommit = True
         except Exception,e:
             print "Unable to connect to database."
             print str(e)
