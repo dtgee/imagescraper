@@ -1,0 +1,17 @@
+{
+  "name": "imagescraper",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "dtgee <techan88@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/dtgee/imagescraper",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

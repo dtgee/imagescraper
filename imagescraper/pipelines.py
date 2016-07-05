@@ -7,6 +7,7 @@
 
 import psycopg2
 from scrapy.utils.project import get_project_settings
+import password
 
 SETTINGS = get_project_settings()
 
@@ -15,13 +16,12 @@ class PostgresPipeline(object):
     def __init__(self):
         self.conn = None
         try:
-            with open('pw.txt') as f:
-                pw = f.readline().rstrip('\n')
-                self.conn = psycopg2.connect(database=SETTINGS['DB_NAME'],
-                                             user=SETTINGS['DB_USER'],
-                                             password=pw,
-                                             host=SETTINGS['DB_HOST'])
-                self.conn.autocommit = True
+            pw = password.read_password()
+            self.conn = psycopg2.connect(database=SETTINGS['DB_NAME'],
+                                         user=SETTINGS['DB_USER'],
+                                         password=pw,
+                                         host=SETTINGS['DB_HOST'])
+            self.conn.autocommit = True
         except Exception,e:
             print "Unable to connect to database."
             print str(e)
