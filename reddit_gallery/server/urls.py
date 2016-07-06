@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from rest_framework.routers import DefaultRouter
+from gallery.views import ImagesViewSet
 
-urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-]
+router = DefaultRouter()
+router.register(prefix='images', viewset=ImagesViewSet)
+
+urlpatterns = router.urls
+#[
+#    url(r'^admin/', admin.site.urls),
+#]
