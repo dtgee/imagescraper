@@ -21,7 +21,6 @@ from gallery.views import ImagesViewSet
 router = DefaultRouter()
 router.register(prefix='images', viewset=ImagesViewSet)
 
-urlpatterns = router.urls
-#[
-#    url(r'^admin/', admin.site.urls),
-#]
+urlpatterns = [
+    url(r'^index/', include(router.urls),
+]
