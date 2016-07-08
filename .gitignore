@@ -1,3 +1,4 @@
 /output
-/imagescraper/pw.txt
+/pw.txt
 /imagescraper/output.json
+/imagescraper/spiders/output.json
