@@ -1,18 +1,19 @@
 var Gallery = React.createClass({
-	getInitialStateL function() {
+	getInitialState: function() {
 		return {data: []};
 	},
-	retrieveImages: function() {
-		var retrieveScriptPath = "../../server/retrieve.py";
+	componentDidMount: function() {
 		$.ajax({
-			url: retrieveScriptPath, 
+			type: 'get',
+			url: "../../server/retrieve.py",
 			dataType: 'json',
 			cache: false,
 			success: function(data) {
+				console.log("success");
 				this.setState({data: data});
 			}.bind(this),
 			error: function(xhr, status, err) {
-				console.error(retrieveScriptPath, status, err.toString());
+				console.error("../../server/retrieve.py", status, err.toString());
 			}.bind(this)
 		});
 	},
@@ -30,7 +31,7 @@ var Image = React.createClass({
 		var showImagePath = "show_image.js"
 		return (
 			<div className="image">
-				<script type="text/javascript" src=showImagePath path="'" + {this.props.path} + "'">
+				<script type="text/javascript" src={showImagePath} data-path={this.props.path}>
 				</script>
 			</div>
 		);
@@ -38,6 +39,6 @@ var Image = React.createClass({
 });
 
 ReactDOM.render(
-  <h1>Hello, world!</h1>,
-  document.getElementById('example')
+	<Gallery />,
+  document.getElementById('app')
 );
