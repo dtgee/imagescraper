@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from gallery.models import Images
+from models import Images
 
 class ImagesSerializer(serializers.ModelSerializer):
     """Serializer to represent the Images model"""
