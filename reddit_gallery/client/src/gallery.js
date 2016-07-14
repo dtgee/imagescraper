@@ -5,7 +5,7 @@ var Gallery = React.createClass({
 	componentDidMount: function() {
 		$.ajax({
 			type: 'get',
-			url: "../../server/retrieve.py",
+			url: "retrieve.py",
 			dataType: 'json',
 			cache: false,
 			success: function(data) {
@@ -13,7 +13,9 @@ var Gallery = React.createClass({
 				this.setState({data: data});
 			}.bind(this),
 			error: function(xhr, status, err) {
-				console.error("../../server/retrieve.py", status, err.toString());
+				var loc = window.location.pathname;
+				console.log(loc.substring(0, loc.lastIndexOf('/')));
+				console.error("retrieve.py", status, err.toString());
 			}.bind(this)
 		});
 	},
