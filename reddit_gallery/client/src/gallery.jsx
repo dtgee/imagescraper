@@ -1,3 +1,6 @@
+import React from 'react';
+import $ from 'jquery';
+
 var Gallery = React.createClass({
   getInitialState: function() {
     return {data: []};
@@ -29,7 +32,7 @@ var Gallery = React.createClass({
 
 var Image = React.createClass({
   render: function() {
-    var showImagePath = "show_image.js"
+    var showImagePath = "src/show_image.js"
     return (
       <div className="image">
         <script type="text/javascript" src={showImagePath} data-path={this.props.path}>
@@ -38,8 +41,3 @@ var Image = React.createClass({
     );
   }
 });
-
-ReactDOM.render(
-  <Gallery />,
-  document.getElementById('app')
-);

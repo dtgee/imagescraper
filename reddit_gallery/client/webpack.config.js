@@ -1,9 +1,9 @@
 var config = {
-   entry: './src/gallery.js',
+   entry: './src/entry.js',
 	
    output: {
       path:'./',
-      filename: 'index.js',
+      filename: 'bundle.js',
    },
 	
    devServer: {
