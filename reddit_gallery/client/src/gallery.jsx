@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 
-var Gallery = React.createClass({
+export var Gallery = React.createClass({
   getInitialState: function() {
     return {data: []};
   },
@@ -30,6 +30,7 @@ var Gallery = React.createClass({
   }
 });
 
+/* export? */
 var Image = React.createClass({
   render: function() {
     var showImagePath = "src/show_image.js"
