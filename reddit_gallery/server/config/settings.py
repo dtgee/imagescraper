@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'reddit_gallery',
     'gallery',
     'rest_framework',
+    'gunicorn'
 ]
 
 MIDDLEWARE_CLASSES = [

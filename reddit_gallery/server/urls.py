@@ -17,11 +17,13 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
 from gallery.views import ImagesViewSet
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 router = DefaultRouter()
 router.register(prefix='images', viewset=ImagesViewSet)
 
 urlpatterns = router.urls
+urlpatterns += staticfiles_urlpatterns()
 #urlpatterns = [
 #    url(r'^index/', include(router.urls)),
 #]
