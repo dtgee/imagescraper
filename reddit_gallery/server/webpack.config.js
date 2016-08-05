@@ -5,7 +5,7 @@ var BundleTracker = require('webpack-bundle-tracker')
 
 module.exports = {
     //Base directory (absolute path) for resolving the entry option
-    context: '/home/terence/Desktop/projects/reddit_image_gallery/reddit_gallery/server',
+    context: __dirname,
     //You don't have to specify the extension now,
     //Because you will specify extensions later in the `resolve` section
     entry: './assets/js/index', 
@@ -14,7 +14,7 @@ module.exports = {
         //Where you want your compiled bundle to be stored
         path: path.resolve('./assets/bundles/'), 
         //Naming convention webpack should use for your files
-        filename: 'bundle.js', 
+        filename: '[name]-[hash].js', 
     },
     
     plugins: [
