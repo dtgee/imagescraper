@@ -15,15 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from rest_framework.routers import DefaultRouter
-from gallery.views import ImagesViewSet
+#from rest_framework.routers import DefaultRouter
+from gallery import views 
+from django.views.generic import TemplateView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-router = DefaultRouter()
-router.register(prefix='images', viewset=ImagesViewSet)
+#router = DefaultRouter()
+#router.register(prefix='images', viewset=ImagesViewSet)
 
-urlpatterns = router.urls
+#urlpatterns = router.urls
+urlpatterns = [
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', TemplateView.as_view(template_name='index.html')),
+    url(r'^api/', views.ImageViewSet.as_view(), name='gallery-image'),
+]
 urlpatterns += staticfiles_urlpatterns()
-#urlpatterns = [
-#    url(r'^index/', include(router.urls)),
-#]

@@ -9,4 +9,4 @@ from gallery.serializers import ImagesSerializer
 
 def index(request):
     queryset = Images.objects.all()
-    
+    return render(request, 'index.html')
