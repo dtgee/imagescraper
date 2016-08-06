@@ -27,6 +27,6 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', TemplateView.as_view(template_name='index.html')),
-    url(r'^api/', views.ImageViewSet.as_view(), name='gallery-image'),
+    url(r'^api/', views.ImagesViewSet.as_view(), name='gallery-image'),
 ]
 urlpatterns += staticfiles_urlpatterns()
