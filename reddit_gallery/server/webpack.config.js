@@ -8,7 +8,7 @@ module.exports = {
     context: __dirname,
     //You don't have to specify the extension now,
     //Because you will specify extensions later in the `resolve` section
-    entry: './assets/js/index', 
+    entry: './assets/js/entry', 
     
     output: {
         //Where you want your compiled bundle to be stored
