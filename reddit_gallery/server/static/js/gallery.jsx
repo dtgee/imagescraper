@@ -1,5 +1,5 @@
-var React = require('react');
-var jquery = require('jquery');
+import React from 'react';
+import $ from 'jquery';
 
 export var Gallery = React.createClass({
   getInitialState: function() {
