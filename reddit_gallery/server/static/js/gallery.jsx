@@ -1,7 +1,7 @@
-import React from 'react';
-import $ from 'jquery';
+var React = require('react');
+var jquery = require('jquery');
 
-export var Gallery = React.createClass({
+var Gallery = React.createClass({
   getInitialState: function() {
     return {data: []};
   },
@@ -42,3 +42,5 @@ var Image = React.createClass({
     );
   }
 });
+
+export { Gallery as default };
