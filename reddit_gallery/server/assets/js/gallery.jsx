@@ -9,7 +9,6 @@ var Gallery = React.createClass({
     $.ajax({
       type: "get",
       url: "/static/python_scripts/retrieve.py",
-      dataType: "script",
       cache: false,
       success: function(data) {
         console.log("success");
