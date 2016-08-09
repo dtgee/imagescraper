@@ -8,8 +8,8 @@ var Gallery = React.createClass({
   componentDidMount: function() {
     $.ajax({
       type: "get",
-      url: "retrieve.py",
-      dataType: "json",
+      url: "/static/python_scripts/retrieve.py",
+      dataType: "script",
       cache: false,
       success: function(data) {
         console.log("success");
