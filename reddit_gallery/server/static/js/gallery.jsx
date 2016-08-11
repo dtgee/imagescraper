@@ -8,7 +8,7 @@ var Gallery = React.createClass({
   componentDidMount: function() {
     $.ajax({
       type: "get",
-      url: "/static/python_scripts/retrieve.py",
+      url: "/grab_images",
       cache: false,
       success: function(data) {
         console.log("success");
@@ -23,6 +23,7 @@ var Gallery = React.createClass({
   render: function() {
     return (
         <div className="gallery">
+	hi
           <Image data={this.state.data} />
         </div>
     );
@@ -32,7 +33,7 @@ var Gallery = React.createClass({
 /* export? */
 var Image = React.createClass({
   render: function() {
-    var showImagePath = "src/show_image.js"
+    var showImagePath = "/assets/js/show_image.js"
     return (
       <div className="image">
         <script type="text/javascript" src={showImagePath} data-path={this.props.path}>

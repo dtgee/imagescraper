@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', TemplateView.as_view(template_name='index.html')),
     url(r'^api/', views.ImagesViewSet.as_view({'get': 'list'}), name='gallery-image'),
+    url(r'^grab_images/', 'gallery.views.grab_images'),
 ]
 urlpatterns += staticfiles_urlpatterns()
