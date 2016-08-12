@@ -1,46 +1,61 @@
 var React = require('react');
 var jquery = require('jquery');
 
-var Gallery = React.createClass({
-  getInitialState: function() {
-    return {data: []};
-  },
-  componentDidMount: function() {
+export default class Gallery extends React.Component{
+
+  constructor() {
+    super();
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.state = {
+      data: []
+    }
+  }
+
+  componentDidMount() {
     $.ajax({
       type: "get",
       url: "/grab_images",
       cache: false,
       success: function(data) {
         console.log("success");
-        this.setState({data: data});
+        this.setState({
+          data: data
+	});
       }.bind(this),
       error: function(xhr, status, err) {
         console.warn(xhr.responseText);
-        console.error("retrieve.py", status, err.toString());
+        console.error("grab_images", status, err.toString());
       }.bind(this)
     });
-  },
-  render: function() {
+  }
+
+  render() {
     return (
         <div className="gallery">
 	hi
-          <Image data={this.state.data} />
+          <Image paths="test"></Image>
         </div>
     );
   }
-});
+
+}
 
 /* export? */
-var Image = React.createClass({
-  render: function() {
-    var showImagePath = "/assets/js/show_image.js"
+class Image extends React.Component{
+
+  constructor(props) {
+    super(props);
+    console.log(this.props.paths);
+  }
+
+  render() {
+    var showImagePath = "/assets/js/show_image.js";
     return (
       <div className="image">
-        <script type="text/javascript" src={showImagePath} data-path={this.props.path}>
+        <script type="text/javascript" src={showImagePath} data-path={this.props.paths}>
         </script>
       </div>
     );
   }
-});
 
-export { Gallery as default };
+}
