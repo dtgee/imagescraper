@@ -52,7 +52,7 @@ class Image extends React.Component{
     var showImagePath = "/assets/js/show_image.js";
     return (
       <div className="image">
-        <script type="text/javascript" src={showImagePath} data-path={this.props.paths}>
+        <script type="text/javascript" src={showImagePath} data-path={image}>
         </script>
       </div>
     );
