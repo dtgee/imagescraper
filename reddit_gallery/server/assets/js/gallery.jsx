@@ -1,6 +1,6 @@
 var React = require('react');
 var jquery = require('jquery');
-var imageHandler = require('./show_image.js');
+import show_image from './show_image.js';
 
 export default class Gallery extends React.Component{
 
@@ -57,13 +57,14 @@ class Image extends React.Component{
   constructor(props) {
     super(props);
     console.log("passed: " + this.props.data);
+    console.log(typeof show_image);
   }
 
   render() {
     return (
       <div className="image">
         <script>
-	  imageHandler.show_image();
+	  show_image(this.props.data);
         </script>
       </div>
     );
