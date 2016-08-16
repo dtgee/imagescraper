@@ -1,5 +1,6 @@
 var React = require('react');
 var jquery = require('jquery');
+var imageHandler = require('./show_image.js');
 
 export default class Gallery extends React.Component{
 
@@ -30,11 +31,21 @@ export default class Gallery extends React.Component{
   }
 
   render() {
+    console.log(this.state.data);
+    var imageNodes = this.state.data.map(function(image) {
+      /* test = Object.assign({}, image.id, image.path, image.url); */
+      /* console.log("path: " + image['path']); */
+      return (
+	<Image data={image['path']}>
+	</Image>
+      );
+    });
+
+    console.log("nodes: " + imageNodes);
     return (
-        <div className="gallery">
-	hi
-          <Image paths="test"></Image>
-        </div>
+      <div className="gallery">
+        {imageNodes}
+      </div>
     );
   }
 
@@ -45,14 +56,14 @@ class Image extends React.Component{
 
   constructor(props) {
     super(props);
-    console.log(this.props.paths);
+    console.log("passed: " + this.props.data);
   }
 
   render() {
-    var showImagePath = "/assets/js/show_image.js";
     return (
       <div className="image">
-        <script type="text/javascript" src={showImagePath} data-path={image}>
+        <script>
+	  imageHandler.show_image();
         </script>
       </div>
     );
