@@ -42,7 +42,12 @@ module.exports = {
                     //Specify that we will be dealing with React code
                     presets: ['es2015', 'react'] 
                 }
-            }
+            },
+						//Allow us to use file-loader to output image files and return paths to them
+						{test: /\.(jpg|jpeg|png|gif)$/,
+								loader: 'url?limit=8192',
+								include: '/output/full/'
+						}
         ]
     },
     

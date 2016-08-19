@@ -61,11 +61,10 @@ class Image extends React.Component{
   }
 
   render() {
+    var imgName = "../../output/" + this.props.data;
     return (
       <div className="image">
-        <script>
-	  show_image(this.props.data);
-        </script>
+        <img className="single-image" src={require(imgName)} />
       </div>
     );
   }
