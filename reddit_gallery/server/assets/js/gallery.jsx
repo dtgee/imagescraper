@@ -64,7 +64,7 @@ class Image extends React.Component{
     var imgName = "../../output/" + this.props.data;
     return (
       <div className="image">
-        <img className="single-image" src={require(imgName)} />
+        <img className="single-image" src={image} />
       </div>
     );
   }

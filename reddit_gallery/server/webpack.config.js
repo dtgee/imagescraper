@@ -43,10 +43,10 @@ module.exports = {
                     presets: ['es2015', 'react'] 
                 }
             },
-						//Allow us to use file-loader to output image files and return paths to them
+						//Allow us to use url-loader to output images
 						{test: /\.(jpg|jpeg|png|gif)$/,
 								loader: 'url?limit=8192',
-								include: '/output/full/'
+								include: './output/full/'
 						}
         ]
     },
