@@ -1,6 +1,5 @@
 var React = require('react');
 var jquery = require('jquery');
-import show_image from './show_image.js';
 
 export default class Gallery extends React.Component{
 

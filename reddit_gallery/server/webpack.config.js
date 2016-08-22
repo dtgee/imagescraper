@@ -48,8 +48,6 @@ module.exports = {
 						{
 							 test: /\.(jpg|jpeg|png|gif)$/,
 							 loader: 'url?limit=8192'
-							 //loader: 'file?name=[path][name].[ext]'
-							 //include: './output/full/'
 						}
         ]
     },
