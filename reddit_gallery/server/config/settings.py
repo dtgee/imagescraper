@@ -11,17 +11,16 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import password
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print BASE_DIR
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(+fju=wu3qjit$m6(lus6m+4zyamob)ns%oju@7fqkm!dm(=ph'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,6 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #local apps
+    'reddit_gallery',
+    'gallery',
+    #third party apps
+    'rest_framework',
+    'gunicorn',
+    'webpack_loader',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -56,7 +62,9 @@ ROOT_URLCONF = 'urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+           os.path.join(BASE_DIR, 'templates'), 
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,8 +85,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'imagescraper',
+        'USER': 'terence',
+        'PASSWORD': password.read_password(),
+        'HOST': 'localhost',
+        'PORT':'', 
     }
 }
 
@@ -120,3 +132,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (
+    #Lets Django's collectstatic store webpack bundles
+    os.path.join(BASE_DIR, 'assets'),
+)
+
+####
+# WEBPACK
+####
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+    }
+}
