@@ -32,21 +32,24 @@ module.exports = {
         loaders: [
             //A regex that tells webpack use the following loaders on all 
             //.js and .jsx files
-            {test: /\.jsx?$/, 
+            {
+							 test: /\.jsx?$/, 
                 //We definitely don't want babel to transpile all the files in 
                 //node_modules. That would take a long time.
-                exclude: /node_modules/, 
+               exclude: /node_modules/, 
                 //Use the babel loader 
-                loader: 'babel-loader', 
-                query: {
+               loader: 'babel-loader', 
+               query: {
                     //Specify that we will be dealing with React code
                     presets: ['es2015', 'react'] 
                 }
             },
 						//Allow us to use url-loader to output images
-						{test: /\.(jpg|jpeg|png|gif)$/,
-								loader: 'url?limit=8192',
-								include: './output/full/'
+						{
+							 test: /\.(jpg|jpeg|png|gif)$/,
+							 loader: 'url?limit=8192'
+							 //loader: 'file?name=[path][name].[ext]'
+							 //include: './output/full/'
 						}
         ]
     },

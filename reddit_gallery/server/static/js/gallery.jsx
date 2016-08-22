@@ -61,10 +61,15 @@ class Image extends React.Component{
   }
 
   render() {
-    var imgName = "../../output/" + this.props.data;
+    function requireAll(r) {
+      r.keys().forEach(r); 
+    }
+    requireAll(require.context('../../output/full/', true, /\.(png|jpg|jpeg|gif)$/));
+
+    var imgName = "/static/bundles/output/" + this.props.data;
     return (
       <div className="image">
-        <img className="single-image" src={require(imgName)} />
+        <img className="single-image" src={imgName} />
       </div>
     );
   }
